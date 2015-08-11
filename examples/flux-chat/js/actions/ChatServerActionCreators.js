@@ -18,6 +18,7 @@ var ActionTypes = ChatConstants.ActionTypes;
 module.exports = {
 
   receiveAll: function(rawMessages) {
+    console.log('CharServerActionCreator.receiveAll', rawMessages);
     ChatAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_MESSAGES,
       rawMessages: rawMessages
@@ -25,6 +26,7 @@ module.exports = {
   },
 
   receiveCreatedMessage: function(createdMessage) {
+    console.log('CharServerActionCreator.receiveCreatedMessage');
     ChatAppDispatcher.dispatch({
       type: ActionTypes.RECEIVE_RAW_CREATED_MESSAGE,
       rawMessage: createdMessage

@@ -10,28 +10,29 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+var firebaseUtil = require('./firebaseUtil');
+
 var ChatServerActionCreators = require('../actions/ChatServerActionCreators');
 
-// !!! Please Note !!!
-// We are using localStorage as an example, but in a real-world scenario, this
-// would involve XMLHttpRequest, or perhaps a newer client-server protocol.
-// The function signatures below might be similar to what you would build, but
-// the contents of the functions are just trying to simulate client-server
-// communication and server-side processing.
+firebaseUtil.registerPath('messages',ChatServerActionCreators.receiveAll);
 
 module.exports = {
 
   getAllMessages: function() {
+    console.log('getAllMessages');
     // simulate retrieving data from a database
-    var rawMessages = JSON.parse(localStorage.getItem('messages'));
+    // var rawMessages = JSON.parse(localStorage.getItem('messages'));
 
     // simulate success callback
-    ChatServerActionCreators.receiveAll(rawMessages);
+    // ChatServerActionCreators.receiveAll(rawMessages);
+
+    // Don't get messages on demand from firebase - ie Hollywood.
+    // ChatServerActionCreators.receiveAll([]);
   },
 
   createMessage: function(message, threadName) {
     // simulate writing to a database
-    var rawMessages = JSON.parse(localStorage.getItem('messages'));
+    // var rawMessages = JSON.parse(localStorage.getItem('messages'));
     var timestamp = Date.now();
     var id = 'm_' + timestamp;
     var threadID = message.threadID || ('t_' + Date.now());
@@ -43,13 +44,14 @@ module.exports = {
       text: message.text,
       timestamp: timestamp
     };
-    rawMessages.push(createdMessage);
-    localStorage.setItem('messages', JSON.stringify(rawMessages));
+    // rawMessages.push(createdMessage);
+    // localStorage.setItem('messages', JSON.stringify(rawMessages));
+    firebaseUtil.push('messages', createdMessage);
 
     // simulate success callback
-    setTimeout(function() {
-      ChatServerActionCreators.receiveCreatedMessage(createdMessage);
-    }, 0);
+    // setTimeout(function() {
+    //   ChatServerActionCreators.receiveCreatedMessage(createdMessage);
+    // }, 0);
   }
 
 };

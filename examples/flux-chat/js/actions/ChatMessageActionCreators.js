@@ -19,14 +19,19 @@ var ActionTypes = ChatConstants.ActionTypes;
 
 module.exports = {
 
-  createMessage: function(text, currentThreadID) {
-    ChatAppDispatcher.dispatch({
-      type: ActionTypes.CREATE_MESSAGE,
-      text: text,
-      currentThreadID: currentThreadID
-    });
+  createMessage: function(text, currentThreadID, currentThreadName) {
+    console.log('ChatMessageActionCreator.createMessage', text);
+    // who is listening for this dispatch?  the ChatWebAPIUtils call below does the firebase.
+
+    // commenting out this dispatch on the grounds that ChatServerActionCreators.receiveAll
+    // should lead to a dispatch event that the store heres and emits on?
+    // ChatAppDispatcher.dispatch({
+    //   type: ActionTypes.CREATE_MESSAGE,
+    //   text: text,
+    //   currentThreadID: currentThreadID
+    // });
     var message = ChatMessageUtils.getCreatedMessageData(text, currentThreadID);
-    ChatWebAPIUtils.createMessage(message);
+    ChatWebAPIUtils.createMessage(message, currentThreadName);
   }
 
 };

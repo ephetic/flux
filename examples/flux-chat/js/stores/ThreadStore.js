@@ -40,6 +40,7 @@ var ThreadStore = assign({}, EventEmitter.prototype, {
 
     if (!_currentID) {
       var allChrono = this.getAllChrono();
+      if(!allChrono.length) return;
       _currentID = allChrono[allChrono.length - 1].id;
     }
 

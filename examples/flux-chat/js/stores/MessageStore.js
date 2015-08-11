@@ -23,6 +23,7 @@ var CHANGE_EVENT = 'change';
 var _messages = {};
 
 function _addMessages(rawMessages) {
+  console.log('_addMessages', rawMessages, 'to', _messages);
   rawMessages.forEach(function(message) {
     if (!_messages[message.id]) {
       _messages[message.id] = ChatMessageUtils.convertRawMessage(
@@ -108,7 +109,8 @@ MessageStore.dispatchToken = ChatAppDispatcher.register(function(action) {
         action.text,
         action.currentThreadID
       );
-      _messages[message.id] = message;
+      // _messages[message.id] = message;
+      console.log('_messages', _messages);
       MessageStore.emitChange();
       break;
 

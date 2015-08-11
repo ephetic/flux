@@ -10,11 +10,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+var firebaseUtil = require('./utils/firebaseUtil');
+
 module.exports = {
 
   init: function() {
-    localStorage.clear();
-    localStorage.setItem('messages', JSON.stringify([
+    return; 
+    firebaseUtil.set('messages', [
       {
         id: 'm_1',
         threadID: 't_1',
@@ -71,7 +73,7 @@ module.exports = {
         text: 'At ForwardJS?  Yeah, of course.  See you there!',
         timestamp: Date.now() - 39999
       }
-    ]));
+    ]);
   }
 
 };

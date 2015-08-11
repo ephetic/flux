@@ -35,7 +35,8 @@ function getMessageListItem(message) {
 var MessageSection = React.createClass({
 
   getInitialState: function() {
-    return getStateFromStores();
+    // return getStateFromStores();
+    return { thread: { name: 'loading...', id: '-1'}, messages: [] };
   },
 
   componentDidMount: function() {
@@ -57,7 +58,7 @@ var MessageSection = React.createClass({
         <ul className="message-list" ref="messageList">
           {messageListItems}
         </ul>
-        <MessageComposer threadID={this.state.thread.id}/>
+        <MessageComposer threadID={this.state.thread.id} threadName={this.state.thread.name}/>
       </div>
     );
   },
